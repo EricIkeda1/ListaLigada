@@ -4,11 +4,12 @@ public class Aplicacao {
     public static void main(String[] args) {
         ListaLigada lista = new ListaLigada();
 
-        lista.inserirNoInicio(5);
-        lista.inserirNoInicio(10);
-        lista.inserirNoInicio(15);
-
-        System.out.print("Elementos da lista: ");
-        lista.exibir(); 
+        lista.inserirInicio(10);
+        lista.inserirInicio(100);
+        lista.inserirFinal(20);
+        lista.inserirFinal(30);
+        lista.imprimir();
+        lista.remover(20);
+        lista.imprimir();
     }
 }

@@ -2,39 +2,78 @@ package ListaLigada;
 
 public class ListaLigada {
     private No inicio;
-    private No cauda;
+    private No fim;
+    private int tamanho;    
 
     public ListaLigada() {
-        this.inicio = null;
-        this.cauda = null;
+        inicio = null;
+        fim = null;
+        tamanho = 0;
     }
 
-    //valores add inserir inicio
+    // Inserir no início
     public void inserirInicio(int valor) {
         No novo = new No(valor);
 
         if (inicio == null) {
             inicio = novo;
-            cauda = novo;
+            fim = novo;
         } else {
             novo.proximo = inicio;
             inicio = novo;
         }
+
+        tamanho++;
     }
 
-    //valores add Final
+    // Inserir no final
     public void inserirFinal(int valor) {
         No novo = new No(valor);
 
         if (inicio == null) {
             inicio = novo;
-            cauda = novo;
+            fim = novo;
         } else {
-            cauda.proximo = novo;
-            cauda = novo;
+            fim.proximo = novo;
+            fim = novo;
         }
+
+        tamanho++;
     }
 
+    // Inserir em uma posição (meio)
+    public void inserirPosicao(int valor, int posicao) {
+
+        if (posicao < 0 || posicao > tamanho) {
+            System.out.println("Posição inválida!");
+            return;
+        }
+
+        if (posicao == 0) {
+            inserirInicio(valor);
+            return;
+        }
+
+        if (posicao == tamanho) {
+            inserirFinal(valor);
+            return;
+        }
+
+        No novo = new No(valor);
+        No atual = inicio;
+
+        // vai até o nó anterior
+        for (int i = 0; i < posicao - 1; i++) {
+            atual = atual.proximo;
+        }
+
+        novo.proximo = atual.proximo;
+        atual.proximo = novo;
+
+        tamanho++;
+    }
+
+    // Remover um valor
     public void remover(int valor) {
         if (inicio == null) return;
 
@@ -42,36 +81,44 @@ public class ListaLigada {
             inicio = inicio.proximo;
 
             if (inicio == null) {
-                cauda = null;
+                fim = null;
             }
+
+            tamanho--;
             return;
         }
 
         No atual = inicio;
-        No anterior = null;
 
-        while (atual != null && atual.valor != valor) {
-            anterior = atual;
+        while (atual.proximo != null && atual.proximo.valor != valor) {
             atual = atual.proximo;
         }
 
-        if (atual != null) {
-            anterior.proximo = atual.proximo;
+        if (atual.proximo != null) {
 
-            if (atual == cauda) {
-                cauda = anterior;
+            if (atual.proximo == fim) {
+                fim = atual;
             }
+
+            atual.proximo = atual.proximo.proximo;
+            tamanho--;
         }
     }
 
+    // Mostrar lista
     public void imprimir() {
         No atual = inicio;
 
         while (atual != null) {
-            System.out.print(atual.valor + " -> ");
+            System.out.print(atual.valor + " ");
             atual = atual.proximo;
         }
 
-        System.out.println("null");
+        System.out.println();
+    }
+
+    // Mostrar tamanho
+    public int getTamanho() {
+        return tamanho;
     }
 }

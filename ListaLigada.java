@@ -1,9 +1,10 @@
 package ListaLigada;
 
 public class ListaLigada {
+
     private No inicio;
     private No fim;
-    private int tamanho;    
+    private int tamanho;
 
     public ListaLigada() {
         inicio = null;
@@ -13,6 +14,7 @@ public class ListaLigada {
 
     // Inserir no início
     public void inserirInicio(int valor) {
+
         No novo = new No(valor);
 
         if (inicio == null) {
@@ -28,6 +30,7 @@ public class ListaLigada {
 
     // Inserir no final
     public void inserirFinal(int valor) {
+
         No novo = new No(valor);
 
         if (inicio == null) {
@@ -41,7 +44,7 @@ public class ListaLigada {
         tamanho++;
     }
 
-    // Inserir em uma posição (meio)
+    // Inserir em uma posição
     public void inserirPosicao(int valor, int posicao) {
 
         if (posicao < 0 || posicao > tamanho) {
@@ -49,11 +52,13 @@ public class ListaLigada {
             return;
         }
 
+        // Inserir no início
         if (posicao == 0) {
             inserirInicio(valor);
             return;
         }
 
+        // Inserir no final
         if (posicao == tamanho) {
             inserirFinal(valor);
             return;
@@ -62,7 +67,7 @@ public class ListaLigada {
         No novo = new No(valor);
         No atual = inicio;
 
-        // vai até o nó anterior
+        // Vai até o nó anterior da posição
         for (int i = 0; i < posicao - 1; i++) {
             atual = atual.proximo;
         }
@@ -73,13 +78,19 @@ public class ListaLigada {
         tamanho++;
     }
 
-    // Remover um valor
+    // Remover um valor específico
     public void remover(int valor) {
-        if (inicio == null) return;
 
+        if (inicio == null) {
+            return;
+        }
+
+        // Se o valor estiver no início
         if (inicio.valor == valor) {
+
             inicio = inicio.proximo;
 
+            // Caso a lista fique vazia
             if (inicio == null) {
                 fim = null;
             }
@@ -101,12 +112,27 @@ public class ListaLigada {
             }
 
             atual.proximo = atual.proximo.proximo;
+
             tamanho--;
         }
     }
 
-    // Mostrar lista
+    public void removerInicio() {
+
+        if (inicio == null) {
+            System.out.println("A lista está vazia!");
+            return;
+        }
+        inicio = inicio.proximo;
+
+        if (inicio == null) {
+            fim = null;
+        }
+        tamanho--;
+    }
+
     public void imprimir() {
+
         No atual = inicio;
 
         while (atual != null) {
@@ -117,7 +143,6 @@ public class ListaLigada {
         System.out.println();
     }
 
-    // Mostrar tamanho
     public int getTamanho() {
         return tamanho;
     }

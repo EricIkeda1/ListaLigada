@@ -136,6 +136,33 @@ public class ListaLigada {
         this.tamanho--;
     }
 
+    public void removerPosicao(int posicao) {
+
+        if (posicao < 0 || posicao >= this.tamanho) {
+            System.out.println("Posição inválida!");
+            return;
+        }
+
+        if (posicao == 0) {
+            this.removerInicio();
+            return;
+        }
+
+        No atual = this.inicio;
+
+        for (int i = 0; i < posicao - 1; i++) {
+            atual = atual.proximo;
+        }
+
+        if (atual.proximo == this.fim) {
+            this.fim = atual;
+        }
+
+        atual.proximo = atual.proximo.proximo;
+
+        this.tamanho--;
+    }
+
     // Mostrar lista
     public void imprimir() {
 

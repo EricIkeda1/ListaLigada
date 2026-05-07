@@ -22,5 +22,11 @@ public class Aplicacao {
         System.out.println("Após remover o início:");
         lista.imprimir();
         System.out.println("Tamanho da lista: " + lista.getTamanho());
+        System.out.println("Após remover o valor 80:");
+        System.out.println("Após remover o inicio:");
+        lista.imprimir();
+        lista.removerPosicao(1);       
+        lista.imprimir();
+        lista.imprimir();
     }
 }
